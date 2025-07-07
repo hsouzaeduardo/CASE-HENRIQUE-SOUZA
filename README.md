@@ -68,6 +68,7 @@ PORT=8000
 RELOAD=false
 LOG_LEVEL=info
 
+##Fluxo de Funcionamento Básico
 ```mermaid
 sequenceDiagram
     participant User
