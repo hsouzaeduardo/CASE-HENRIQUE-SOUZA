@@ -45,34 +45,34 @@ Obervabilidade
 
 ##.ENV
 
-# ========================================
-# Azure OpenAI Configuration
-# ========================================
+## ========================================
+## Azure OpenAI Configuration
+## ========================================
 
 AZURE_OPENAI_ENDPOINT=https://<seu-endpoint>.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-12-01-preview
 AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4o-mini
 AZURE_OPENAI_API_KEY=<sua-chave-aqui>
 
-# ========================================
-# Cosmos DB Configuration
-# ========================================
+## ========================================
+## Cosmos DB Configuration
+## ========================================
 
 COSMOS_ENDPOINT=https://<seu-endpoint-cosmos>.documents.azure.com:443/
 COSMOS_KEY=<sua-chave-cosmos-aqui>
 COSMOS_DATABASE_NAME=caseitau
 COSMOS_CONTAINER_NAME=chats
 
-# ========================================
-# App Configuration
-# ========================================
+## ========================================
+## App Configuration
+## ========================================
 
 APP_NAME=AI Agent API
 DEBUG=false
 
-# ========================================
-# Server Configuration
-# ========================================
+## ========================================
+## Server Configuration
+## ========================================
 
 HOST=0.0.0.0
 PORT=8000
