@@ -68,4 +68,44 @@ PORT=8000
 RELOAD=false
 LOG_LEVEL=info
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant AppGateway as Application Gateway
+    participant APIGW as API Gateway
+    participant ChatAPI as chat-api
+    participant Agent as Agent Chat
+    participant Redis as Redis
+    participant LLM as OpenAI
+    participant DB as CosmosDB
 
+    User->>AppGateway: Envia requisição (prompt)
+    AppGateway->>APIGW: Encaminha requisição
+    APIGW->>ChatAPI: Valida e encaminha
+    ChatAPI->>Agent: Passa prompt
+    Agent->>Redis: Verifica cache (resposta prévia?)
+    alt Resposta encontrada
+        Redis-->>Agent: Retorna resposta
+        Agent-->>ChatAPI: Envia resposta pronta
+        ChatAPI-->>APIGW: Retorna resposta ao usuário
+        APIGW-->>AppGateway: Retorna
+        AppGateway-->>User: Retorna resposta
+    else Sem resposta no cache
+        Agent->>LLM: Envia prompt ao OpenAI
+        alt LLM responde OK
+            LLM-->>Agent: Retorna resposta
+            Agent->>DB: Persiste no CosmosDB
+            Agent-->>ChatAPI: Retorna resposta final
+            ChatAPI-->>APIGW: Retorna ao usuário
+            APIGW-->>AppGateway: Retorna
+            AppGateway-->>User: Retorna resposta
+        else Timeout ou falha
+            Agent-->>ChatAPI: Retorna "Em processamento"
+            ChatAPI-->>APIGW: Retorna status para usuário
+            APIGW-->>AppGateway: Retorna
+            AppGateway-->>User: Retorna status
+            Agent->>DB: Atualiza prompt com status pendente
+            Note right of User: Usuário consulta depois ou webhook notifica
+        end
+    end
+```
