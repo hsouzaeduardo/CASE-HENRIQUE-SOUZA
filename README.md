@@ -28,6 +28,13 @@ pip install -r requirements.txt
 
 uvicorn main:app --reload
 
+## Executar Dockerfile
+docker build -f .devops/dockerfile -t agent-chat:latest .
+
+docker run -p 8000:8000 --env-file .env agent-chat:latest
+
+
+
 ## 📦 Estrutura do Projeto
 
 ## 📝 Funcionalidades
