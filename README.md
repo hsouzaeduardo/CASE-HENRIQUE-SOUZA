@@ -40,7 +40,7 @@ uvicorn main:app --reload
 ## Licença
 Este projeto está sob a licença MIT.
 
-## O que falta ?
+## O que falta Implementar ?
 Obervabilidade
 
 ### .ENV
